@@ -114,6 +114,11 @@ class LeggedRobot(BaseTask):
         self.time_out_buf = self.episode_length_buf > self.max_episode_length
         self.reset_buf |= self.time_out_buf
 
+        # check termination with base height
+        self.reset_buf |= self.root_states[:,2]<0.2
+        # print(torch.mean(self.root_states[:,2]))
+
+
     def reset_idx(self, env_ids):
         """ Reset some environments.
         """
@@ -580,6 +585,8 @@ class LeggedRobot(BaseTask):
 
         body_names = self.gym.get_asset_rigid_body_names(robot_asset)
         self.dof_names = self.gym.get_asset_dof_names(robot_asset)
+        print("Body names: ", body_names)
+        print("self.dof_names: ", self.dof_names)
         self.num_bodies = len(body_names)
         self.num_dofs = len(self.dof_names)
         feet_names = [s for s in body_names if self.cfg.asset.foot_name in s]
@@ -915,3 +922,30 @@ class LeggedRobot(BaseTask):
         imbalance = torch.abs(left_support - right_support)
         moving = (torch.norm(self.commands[:, :2], dim=1) > 0.1).float()
         return imbalance * moving
+
+    # def _reward_trot_contact(self):
+    #     contact_filt = 1. * self.contact_filt
+    #     pattern_match1 = torch.mean(torch.abs(contact_filt - self.trot_pattern1), dim=-1)
+    #     pattern_match2 = torch.mean(torch.abs(contact_filt - self.trot_pattern2), dim=-1)
+    #     pattern_match_flag = 1. * (pattern_match1 * pattern_match2 > 0)
+    #     return pattern_match_flag * (torch.norm(self.commands[:, :2], dim=1) > 0.1)
+    def _reward_hip_pos(self):
+        # return torch.sum(torch.square(self.dof_pos[:, [0, 3, 6, 9]] - self.default_dof_pos[:, [0, 3, 6, 9]]), dim=1)
+        flag = 1. * (torch.abs(self.commands[:, 1]) == 0)
+        return flag * torch.sum(
+            torch.square(self.dof_pos[:, [0, 3, 6, 9]] - torch.zeros_like(self.dof_pos[:, [0, 3, 6, 9]])), dim=1)
+        # return flag * 1.*(torch.abs(torch.sum(self.dof_pos[:, [0, 3, 6, 9]],dim=-1)) > 0.0)
+
+
+    def _reward_hip_pos_2(self):
+        # return torch.sum(torch.square(self.dof_pos[:, [0, 3, 6, 9]] - self.default_dof_pos[:, [0, 3, 6, 9]]), dim=1)
+        flag = 1. * (torch.abs(self.commands[:, 1]) == 0)
+        return flag * 1. * torch.square(self.dof_pos[:, 0] + self.dof_pos[:, 9]) + flag * 1. * torch.square(self.dof_pos[:, 3] + self.dof_pos[:, 6])
+
+    def _reward_thigh_pos_2(self):
+        flag = 1. * (torch.abs(self.commands[:, 1]) == 0)
+        return flag * 1. * torch.square(self.dof_pos[:, 1] - self.dof_pos[:, 10]) + flag * 1. * torch.square(self.dof_pos[:, 4] - self.dof_pos[:, 7])
+
+    def _reward_calf_pos_2(self):
+        flag = 1. * (torch.abs(self.commands[:, 1]) == 0)
+        return flag * 1. * torch.square(self.dof_pos[:, 2] - self.dof_pos[:, 11]) + flag * 1. * torch.square(self.dof_pos[:, 5] - self.dof_pos[:, 8])

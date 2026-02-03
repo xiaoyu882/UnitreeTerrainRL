@@ -23,6 +23,29 @@
 
 Please refer to [setup.md](/doc/setup_en.md) for installation and configuration steps.
 
+        task_registry.register( "go2", LeggedRobot, GO2RoughCfg(), GO2RoughCfgPPO())
+
+        heading_command = False # if true: compute ang vel command from heading error
+        class ranges:
+            lin_vel_x = [0, 1.5] # min max [m/s]
+            lin_vel_y = [0, 0]   # min max [m/s]
+            ang_vel_yaw = [-0.3, 0.3]    # min max [rad/s]
+            heading = [-3.14, 3.14]
+
+        kill root height added 0.2 
+        start pos 0 0 0.35
+
+        base height 0.3 [Feb03_03-25-34_](logs/rough_go2/Feb03_03-25-34_)
+        base height 0.35 [Feb03_03-49-13_](logs/rough_go2/Feb03_03-49-13_)
+        3 * base height [Feb03_04-08-15_](logs/rough_go2/Feb03_04-08-15_)
+        3 * base height  3 * feet air[Feb03_04-31-34_](logs/rough_go2/Feb03_04-31-34_)
+        3 * base height  1 * feet air add    reward   hip_pos = -0.2  [Feb03_05-19-45_](logs/rough_go2/Feb03_05-19-45_)
+        3 * base height  3 * feet air add    reward   hip_pos = -0.2  [Feb03_05-38-10_](logs/rough_go2/Feb03_05-38-10_)
+        3 * base height  3 * feet air add    reward   hip_pos = -0.2  hip_pos2 = -0.2 [Feb03_12-08-53_](logs/rough_go2/Feb03_12-08-53_)
+        3 * base height  3 * feet air add    reward   hip_pos = -0.2  hip_pos2 = -0.2 [Feb03_12-08-53_](logs/rough_go2/Feb03_12-08-53_)
+        thigh_pos_2 = -0.2   calf_pos_2 = -0.2 added
+        thigh_pos_2 = -0.5   calf_pos_2 = -0.5 added  [Feb03_14-00-51_](logs/rough_go2/Feb03_14-00-51_)
+        base height 0.3    [Feb03_14-49-54_](logs/rough_go2/Feb03_14-49-54_)
 ## 🔁 Process Overview
 
 The basic workflow for using reinforcement learning to achieve motion control is:

@@ -56,7 +56,7 @@ class GO2RoughCfg( LeggedRobotCfg ):
         # frame related
         combine_frame = False
     class init_state( LeggedRobotCfg.init_state ):
-        pos = [0.0, 0.0, 0.42] # x,y,z [m]
+        pos = [0.0, 0.0, 0.35] # x,y,z [m]
         default_joint_angles = { # = target angles [rad] when action = 0.0
             'FL_hip_joint': 0.1,   # [rad]
             'RL_hip_joint': 0.1,   # [rad]
@@ -113,20 +113,26 @@ class GO2RoughCfg( LeggedRobotCfg ):
             torques = -0.00001  # Changed from 0.0 to small penalty
             dof_vel = -0.
             dof_acc = -2.5e-7
-            base_height = -0.99
-            feet_air_time = 1.0
+            base_height = -0.99 * 3
+            feet_air_time = 1.0 * 3
             collision = -1.
             feet_stumble = -0.0
-            action_rate = -0.01
+            action_rate = -0.01  * 0.1
             stand_still = -0.
-            dof_pos_limits = -0.05
+            dof_pos_limits = -0.05 * 0.1
+            hip_pos = -0.2
+            hip_pos_2 = -0.5
+            thigh_pos_2 = -0.5
+            calf_pos_2 = -0.5
+
+
 
         only_positive_rewards = False
         tracking_sigma = 0.25
         soft_dof_pos_limit = 0.9  # GO2 specific - tighter than base
         soft_dof_vel_limit = 1.
         soft_torque_limit = 1.
-        base_height_target = 0.30  # GO2 specific height
+        base_height_target = 0.3  # GO2 specific height
         max_contact_force = 100.
 
 class GO2RoughCfgPPO( LeggedRobotCfgPPO ):
