@@ -1,6 +1,11 @@
 from legged_gym.envs.base.legged_robot_config import LeggedRobotCfg, LeggedRobotCfgPPO
 
 class GO2RoughCfg( LeggedRobotCfg ):
+    class env(LeggedRobotCfg.env):
+        train_type = "MorAL"
+        num_histroy_obs = 4
+        num_privileged_obs = 224  # 虽然 MorAL 代码里用的是 privileged_info，但维度必须是 224
+
     class terrain( LeggedRobotCfg.terrain ):
         mesh_type = 'plane' #'trimesh' # "heightfield" # none, plane, heightfield or trimesh
         measure_heights = False #True
