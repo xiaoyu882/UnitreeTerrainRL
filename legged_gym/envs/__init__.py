@@ -16,7 +16,6 @@ from legged_gym.envs.h1_2.h1_2_env import H1_2Robot
 from legged_gym.envs.g1.g1_config import G1RoughCfg, G1RoughCfgPPO
 from legged_gym.envs.g1.g1_env import G1Robot
 from .base.legged_robot import LeggedRobot
-from .go2.go2_env import LeggedRobotR2
 from .go2.go2_flat_gait_env import Go2FlatGaitRobot
 
 from legged_gym.utils.task_registry import task_registry
