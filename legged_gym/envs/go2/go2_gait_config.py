@@ -42,10 +42,10 @@ class GO2WalkCfg(GO2RoughCfg):
 class GO2TrotCfg(GO2RoughCfg):
     class commands(GO2RoughCfg.commands):
         class ranges:
-            lin_vel_x = [0.0, 1.5]
-            lin_vel_y = [-0.5, 0.5]
-            ang_vel_yaw = [-1.0, 1.0]
-            heading = [-3.14, 3.14]
+            lin_vel_x = [0.1, 1.5]
+            lin_vel_y = [-0.0, 0.0]
+            ang_vel_yaw = [-0.0, 0.0]
+            heading = [0.0, 0.0]
 
     class rewards(GO2RoughCfg.rewards):
         gait = "trot"
@@ -75,9 +75,9 @@ class GO2PaceCfg(GO2RoughCfg):
     class commands(GO2RoughCfg.commands):
         class ranges:
             lin_vel_x = [0.5, 2.0]
-            lin_vel_y = [-0.3, 0.3]  
-            ang_vel_yaw = [-0.8, 0.8]
-            heading = [-3.14, 3.14]
+            lin_vel_y = [-0.0, 0.0]
+            ang_vel_yaw = [-0.0, 0.0]
+            heading = [0.0, 0.0]
 
     class rewards(GO2RoughCfg.rewards):
         gait = "pace"
@@ -106,9 +106,9 @@ class GO2BoundCfg(GO2RoughCfg):
     class commands(GO2RoughCfg.commands):
         class ranges:
             lin_vel_x = [0.8, 2.5]   
-            lin_vel_y = [-0.2, 0.2] 
-            ang_vel_yaw = [-0.6, 0.6]
-            heading = [-3.14, 3.14]
+            lin_vel_y = [-0.0, 0.0]
+            ang_vel_yaw = [-0.0, 0.0]
+            heading = [0.0, 0.0]
 
     class rewards(GO2RoughCfg.rewards):
         gait = "bound"
