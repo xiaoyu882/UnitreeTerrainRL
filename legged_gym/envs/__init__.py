@@ -27,6 +27,9 @@ task_registry.register("go2_walk", Go2FlatGaitRobot, GO2WalkCfg(), GO2WalkCfgPPO
 task_registry.register("go2_trot", Go2FlatGaitRobot, GO2TrotCfg(), GO2TrotCfgPPO())
 task_registry.register("go2_pace", Go2FlatGaitRobot, GO2PaceCfg(), GO2PaceCfgPPO())
 task_registry.register("go2_bound", Go2FlatGaitRobot, GO2BoundCfg(), GO2BoundCfgPPO())
+task_registry.register("trot", Go2FlatGaitRobot, GO2TrotCfg(), GO2TrotCfgPPO())
+task_registry.register("pace", Go2FlatGaitRobot, GO2PaceCfg(), GO2PaceCfgPPO())
+task_registry.register("bound", Go2FlatGaitRobot, GO2BoundCfg(), GO2BoundCfgPPO())
 
 task_registry.register( "h1", H1Robot, H1RoughCfg(), H1RoughCfgPPO())
 task_registry.register( "h1_2", H1_2Robot, H1_2RoughCfg(), H1_2RoughCfgPPO())
